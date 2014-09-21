@@ -1,14 +1,14 @@
 package com.smartcal.models;
 
+/**
+ * 
+ * @author Gorjan
+ *	Model class for the relation attending(uid,eid)
+ */
 public class Attending {
 
 	private User user;
 	private Event event;
-
-	public Attending(User usr, Event evt) {
-		user = usr;
-		event = evt;
-	}
 
 	public User getUser() {
 		return user;

@@ -1,5 +1,10 @@
 package com.smartcal.models;
 
+/**
+ * 
+ * @author Gorjan
+ *	Model class for the relation friend(user1,user2,similarity)
+ */
 public class Friendship {
 
 	private User user1;
@@ -9,7 +14,7 @@ public class Friendship {
 	public Friendship(User usr1, User usr2) {
 		user1 = usr1;
 		user2 = usr2;
-
+		//calculateSimilarity();
 	}
 
 	public double calculateSimilarity() {

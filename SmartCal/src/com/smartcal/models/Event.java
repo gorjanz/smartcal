@@ -2,6 +2,11 @@ package com.smartcal.models;
 
 import java.sql.Date;
 
+/**
+ * 
+ * @author Gorjan
+ *	Model class for the relation events(eventid,title,description,url,starttime,endtime)
+ */
 public class Event {
 
 	private int eventId;
@@ -10,26 +15,6 @@ public class Event {
 	private String url;
 	private Date startTime;
 	private Date endTime;
-
-	public Event(String description, String title, String url, Date startTime,
-			Date endTime) {
-		this.eventId = User.NOT_PERSISTED;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
-
-	public Event(int id, String title, String description, String url,
-			Date startTime, Date endTime) {
-		this.eventId = id;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
 
 	public int getEventId() {
 		return eventId;

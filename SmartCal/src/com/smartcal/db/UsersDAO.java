@@ -1,11 +1,11 @@
-package com.smartcal.services;
+package com.smartcal.db;
 
 import java.util.List;
 
 import com.smartcal.models.Event;
 import com.smartcal.models.User;
 
-public interface UsersService {
+public interface UsersDAO {
 	
 	public void addUser(User usr);
 	

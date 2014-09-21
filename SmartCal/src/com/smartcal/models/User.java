@@ -2,6 +2,11 @@ package com.smartcal.models;
 
 import java.sql.Date;
 
+/**
+ * 
+ * @author Gorjan
+ *	Model class for the relation users(userid,name,email,signupdate,username,password)
+ */
 public class User {
 
 	public static final int NOT_PERSISTED = -1;
@@ -12,26 +17,6 @@ public class User {
 	private String email;
 	private String password;
 	private Date signUpDate;
-
-	public User(String userName, String password, String email,
-			Date signUpDate, String name) {
-		this.userId = NOT_PERSISTED;
-		this.userName = userName;
-		this.password = password;
-		this.name = name;
-		this.signUpDate = signUpDate;
-		this.email = email;
-	}
-
-	public User(int id, String userName, String password, String email,
-			Date signUpDate, String name) {
-		this.userId = id;
-		this.userName = userName;
-		this.password = password;
-		this.name = name;
-		this.signUpDate = signUpDate;
-		this.email = email;
-	}
 
 	public void setUserId(int id) {
 		userId = id;
