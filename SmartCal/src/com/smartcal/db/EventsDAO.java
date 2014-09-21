@@ -15,6 +15,8 @@ public interface EventsDAO {
 	
 	public void attend(User usr, Event evt);
 	
+	public Event getById(int evtId);
+	
 	public List<User> getAttendies(Event evt);
 	
 }
