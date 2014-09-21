@@ -41,8 +41,9 @@ public class EventJdbcTemplate implements EventsDAO {
 
 	@Override
 	public void removeEvent(Event evt) {
-		// TODO Auto-generated method stub
-
+		String sql = "delete from smartcaldb.events where smartcaldb.events.eventid = ?;";
+		jdbcTemplate.update(sql, evt.getEventId());
+		return;
 	}
 
 	@Override
