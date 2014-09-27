@@ -12,12 +12,12 @@ public class EventMapper implements RowMapper<Event> {
 	@Override
 	public Event mapRow(ResultSet resSet, int rowNum) throws SQLException {
 		Event evt = new Event();
-		evt.setEventId(resSet.getInt("eventid"));
-		evt.setTitle(resSet.getString("title"));
-		evt.setDescription(resSet.getString("description"));
-		evt.setUrl(resSet.getString("url"));
-		evt.setStartTime(resSet.getDate("starttime"));
-		evt.setStartTime(resSet.getDate("endtime"));
+		evt.setEventId(resSet.getInt(Event.COLUMN_EVENTID));
+		evt.setTitle(resSet.getString(Event.COLUMN_TITLE));
+		evt.setDescription(resSet.getString(Event.COLUMN_DESCRIPTION));
+		evt.setUrl(resSet.getString(Event.COLUMN_URL));
+		evt.setStartTime(resSet.getDate(Event.COLUMN_STARTIME));
+		evt.setStartTime(resSet.getDate(Event.COLUMN_ENDTIME));
 		return evt;
 	}
 	
