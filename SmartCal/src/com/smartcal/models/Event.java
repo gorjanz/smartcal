@@ -9,6 +9,13 @@ import java.sql.Date;
  */
 public class Event {
 
+	public static final String COLUMN_EVENTID = "eventid";
+	public static final String COLUMN_TITLE = "title";
+	public static final String COLUMN_DESCRIPTION = "description";
+	public static final String COLUMN_URL = "url";
+	public static final String COLUMN_STARTIME = "starttime";
+	public static final String COLUMN_ENDTIME = "endtime";
+	
 	private int eventId;
 	private String title;
 	private String description;

@@ -7,6 +7,9 @@ package com.smartcal.models;
  */
 public class Attending {
 
+	public static final String COLUMN_UID = "uid";
+	public static final String COLUMN_EID = "eid";
+	
 	private User user;
 	private Event event;
 

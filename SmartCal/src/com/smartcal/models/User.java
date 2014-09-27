@@ -11,6 +11,13 @@ public class User {
 
 	public static final int NOT_PERSISTED = -1;
 	
+	public static final String COLUMN_USERID = "userid";
+	public static final String COLUMN_NAME = "name";
+	public static final String COLUMN_EMAIL = "email";
+	public static final String COLUMN_SIGNUPDATE = "signupdate";
+	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_PASSWORD = "password";
+	
 	private int userId;
 	private String name;
 	private String userName;

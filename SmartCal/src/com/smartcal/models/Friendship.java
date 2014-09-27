@@ -7,6 +7,10 @@ package com.smartcal.models;
  */
 public class Friendship {
 
+	public static final String COLUMN_USER1 = "user1";
+	public static final String COLUMN_USER2 = "user2";
+	public static final String COLUMN_SIMILARITY = "similarity";
+	
 	private User user1;
 	private User user2;
 	private double similarity;
