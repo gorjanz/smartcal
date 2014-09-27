@@ -1,10 +1,10 @@
-package com.smartcal.db;
+package com.smartcal.repositories;
 
 import java.util.List;
 
 import com.smartcal.models.User;
 
-public interface FriendsDAO {
+public interface FriendsRepository {
 
 	public List<User> getFriendsFor(User usr);
 	

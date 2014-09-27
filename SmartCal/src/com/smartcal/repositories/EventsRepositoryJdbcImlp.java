@@ -1,4 +1,4 @@
-package com.smartcal.db;
+package com.smartcal.repositories;
 
 import java.sql.Date;
 import java.text.DateFormat;
@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.smartcal.models.Event;
 import com.smartcal.models.User;
 
-public class EventJdbcTemplate implements EventsDAO {
+public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

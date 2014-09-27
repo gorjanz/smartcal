@@ -1,11 +1,11 @@
-package com.smartcal.db;
+package com.smartcal.repositories;
 
 import java.util.List;
 
 import com.smartcal.models.Event;
 import com.smartcal.models.User;
 
-public interface UsersDAO {
+public interface UsersRepository {
 	
 	public void addUser(User usr);
 	

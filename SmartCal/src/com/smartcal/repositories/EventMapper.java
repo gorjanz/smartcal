@@ -1,4 +1,4 @@
-package com.smartcal.db;
+package com.smartcal.repositories;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
