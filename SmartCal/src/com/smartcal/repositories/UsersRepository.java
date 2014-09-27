@@ -11,7 +11,7 @@ public interface UsersRepository {
 	
 	public void deleteUser(User usr);
 	
-	public List<User> getFriends(User usr);
+	public User getById(int id);
 	
 	public List<Event> getPastEvents(User usr);
 	
