@@ -26,10 +26,15 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 	@Override
 	public User getById(int id) {
 		String sql = "select * from smartcaldb.users where users.userid = ?;";
-		;
 		User usr = (User) jdbcTemplate.queryForObject(sql, new Object[] { id },
 				new UserMapper());
 		return usr;
+	}
+	
+	@Override
+	public List<User> getUsers() {
+		String sql = "select distinct u.* from smartcaldb.users;";
+		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql));
 	}
 
 	@Override
@@ -45,19 +50,19 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 	}
 
 	@Override
-	public void deleteUser(User usr) {
+	public void deleteUser(int usrId) {
 		String sql = "delete from smartcaldb.users where smartcaldb.users.userid = ?;";
-		jdbcTemplate.update(sql, usr.getUserId());
+		jdbcTemplate.update(sql, usrId);
 		return;
 	}
 
 	@Override
-	public List<User> getAttendies(Event evt) {
+	public List<User> getAttendies(int evtId) {
 		String sql = "select users.*" 
 				+ "from smartcaldb.users, smartcaldb.attending"
 				+ "where users.userid = attending.uid and attending.eid = ?;";
 		
-		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql, evt.getEventId()));
+		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql, evtId));
 	}
 
 }
