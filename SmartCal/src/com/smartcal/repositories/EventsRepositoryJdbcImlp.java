@@ -75,12 +75,29 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 	}
 	
 	@Override
-	public List<User> getAttendies(Event evt) {
-		String sql = "select users.*" 
-				+ "from smartcaldb.users, smartcaldb.attending"
-				+ "where users.userid = attending.uid and attending.eid = ?;";
-		
-		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql, evt.getEventId()));
+	public List<Event> getPastEvents(User usr) {
+		String sql = "select e.*"
+				+ "from smartcaldb.events as e, smartcaldb.attending as a"
+				+ "where a.uid = ? and a.eid = e.eventid and e.starttime <= '?'";
+		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+
+		return RepositoryUtils
+				.generateEventResultList(jdbcTemplate.queryForList(sql,
+						usr.getUserId(),
+						formatter.format(new Date(System.currentTimeMillis()))));
+	}
+
+	@Override
+	public List<Event> getIncomingEvents(User usr) {
+		String sql = "select e.*"
+				+ "from smartcaldb.events as e, smartcaldb.attending as a"
+				+ "where a.uid = ? and a.eid = e.eventid and e.starttime >= '?'";
+		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+
+		return RepositoryUtils
+				.generateEventResultList(jdbcTemplate.queryForList(sql,
+						usr.getUserId(),
+						formatter.format(new Date(System.currentTimeMillis()))));
 	}
 
 	@Override

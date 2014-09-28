@@ -1,5 +1,6 @@
 package com.smartcal.repositories;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.smartcal.models.Event;
 import com.smartcal.models.User;
+import com.smartcal.utils.RepositoryUtils;
 
 @Repository
 public class UsersRepositoryJdbcImpl implements UsersRepository {
@@ -50,15 +52,12 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 	}
 
 	@Override
-	public List<Event> getPastEvents(User usr) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Event> getIncomingEvents(User usr) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getAttendies(Event evt) {
+		String sql = "select users.*" 
+				+ "from smartcaldb.users, smartcaldb.attending"
+				+ "where users.userid = attending.uid and attending.eid = ?;";
+		
+		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql, evt.getEventId()));
 	}
 
 }

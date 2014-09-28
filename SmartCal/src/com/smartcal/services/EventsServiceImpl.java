@@ -44,12 +44,12 @@ public class EventsServiceImpl implements EventsService {
 
 	@Override
 	public List<Event> getPastEvents(User usr) {
-		return usersRepository.getPastEvents(usr);
+		return eventsRepository.getPastEvents(usr);
 	}
 
 	@Override
 	public List<Event> getIncomingEvents(User usr) {
-		return usersRepository.getIncomingEvents(usr);
+		return eventsRepository.getIncomingEvents(usr);
 	}
 	
 }

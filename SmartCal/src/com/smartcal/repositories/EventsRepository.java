@@ -18,9 +18,11 @@ public interface EventsRepository {
 	
 	public void cancel(User usr, Event evt);
 	
-	public Event getById(int evtId);
+	public Event getById(int evtId);	
 	
-	public List<User> getAttendies(Event evt);
+	public List<Event> getPastEvents(User usr);
+	
+	public List<Event> getIncomingEvents(User usr);
 	
 	public List<Event> getByDate(Date date);
 	

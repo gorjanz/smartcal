@@ -40,7 +40,7 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public List<User> getAttendies(Event evt) {
-		return eventsRepository.getAttendies(evt);
+		return usersRepository.getAttendies(evt);
 	}
 
 	@Override
