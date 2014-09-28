@@ -13,8 +13,6 @@ public interface UsersRepository {
 	
 	public User getById(int id);
 	
-	public List<Event> getPastEvents(User usr);
-	
-	public List<Event> getIncomingEvents(User usr);
+	public List<User> getAttendies(Event evt);
 	
 }
