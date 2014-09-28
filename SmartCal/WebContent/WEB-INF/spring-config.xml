@@ -18,7 +18,7 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.smarcal.**" />
 
-	<!-- ... -->
+	<!-- setup database connectivity bean -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -32,6 +32,26 @@
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 	    <constructor-arg ref="dataSource"/>
+	</bean>
+	
+	<!-- setup json marschalling -->
+
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="false" />
+		<property name="favorParameter" value="true" />
+		<property name="parameterName" value="mediaType" />
+		<!-- change this in order to receive json by setting accept header to "application/json" in the request -->
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="useJaf" value="false" />
+		<property name="defaultContentType" value="application/json" />
+
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
 	</bean>
 
 </beans>
