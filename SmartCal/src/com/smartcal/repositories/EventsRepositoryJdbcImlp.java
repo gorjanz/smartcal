@@ -1,5 +1,6 @@
 package com.smartcal.repositories;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -81,4 +82,15 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 		
 		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql, evt.getEventId()));
 	}
+
+	@Override
+	public List<Event> getByDate(Date date) {
+		String sql = "select e.*"
+				+ "from smartcaldb.events as e"
+				+ "where e.starttime = '?'";
+		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		
+		return RepositoryUtils.generateEventResultList(jdbcTemplate.queryForList(sql, formatter.format(date)));
+	}
+
 }

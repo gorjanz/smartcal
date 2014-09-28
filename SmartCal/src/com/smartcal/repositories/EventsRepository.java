@@ -1,5 +1,6 @@
 package com.smartcal.repositories;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.smartcal.models.Event;
@@ -20,5 +21,7 @@ public interface EventsRepository {
 	public Event getById(int evtId);
 	
 	public List<User> getAttendies(Event evt);
+	
+	public List<Event> getByDate(Date date);
 	
 }
