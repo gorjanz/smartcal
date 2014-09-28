@@ -2,7 +2,6 @@ package com.smartcal.services;
 
 import java.util.List;
 
-import com.smartcal.models.Event;
 import com.smartcal.models.User;
 
 public interface UsersService {
@@ -11,13 +10,15 @@ public interface UsersService {
 	
 	public void registerNewUser(User newUsr);
 	
-	public void deleteUser(User usr);
+	public void deleteUser(int usr);
 	
-	public List<User> getFriendsFor(User usr);
+	public List<User> getUsers();
 	
-	public List<User> getFriendsWithSimilarityAbove(User usr, double minSimilarity);
+	public List<User> getFriendsFor(int usr);
 	
-	public List<User> getAttendies(Event evt);
+	public List<User> getFriendsWithSimilarityAbove(int usr, double minSimilarity);
 	
-	public List<User> getFriendsAttending(User usr, Event evt);
+	public List<User> getAttendies(int evtId);
+	
+	public List<User> getFriendsAttending(int usrid, int evtid);
 }

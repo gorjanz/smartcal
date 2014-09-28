@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.smartcal.models.Event;
 import com.smartcal.models.User;
 import com.smartcal.repositories.EventsRepository;
 import com.smartcal.repositories.FriendsRepository;
@@ -23,6 +22,23 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private FriendsRepository friendsRepository;
 	
+	public void setEventsRepository(EventsRepository eventsRepository) {
+		this.eventsRepository = eventsRepository;
+	}
+
+	public void setUsersRepository(UsersRepository usersRepository) {
+		this.usersRepository = usersRepository;
+	}
+
+	public void setFriendsRepository(FriendsRepository friendsRepository) {
+		this.friendsRepository = friendsRepository;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return usersRepository.getUsers();
+	}
+	
 	@Override
 	public User getUserById(int id) {
 		return usersRepository.getById(id);
@@ -34,28 +50,28 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void deleteUser(User usr) {
+	public void deleteUser(int usr) {
 		usersRepository.deleteUser(usr);
 	}
 
 	@Override
-	public List<User> getAttendies(Event evt) {
-		return usersRepository.getAttendies(evt);
+	public List<User> getAttendies(int evtId) {
+		return usersRepository.getAttendies(evtId);
 	}
 
 	@Override
-	public List<User> getFriendsFor(User usr) {
+	public List<User> getFriendsFor(int usr) {
 		return friendsRepository.getFriendsFor(usr);
 	}
 
 	@Override
-	public List<User> getFriendsWithSimilarityAbove(User usr,
+	public List<User> getFriendsWithSimilarityAbove(int usrId,
 			double minSimilarity) {
-		return friendsRepository.getFriendsWithSimilarityAbove(usr, minSimilarity);
+		return friendsRepository.getFriendsWithSimilarityAbove(usrId, minSimilarity);
 	}
 
 	@Override
-	public List<User> getFriendsAttending(User usr, Event evt) {
+	public List<User> getFriendsAttending(int usr, int evt) {
 		return friendsRepository.getFriendsAttending(usr, evt);
 	}
 	

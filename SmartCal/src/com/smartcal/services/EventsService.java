@@ -3,18 +3,19 @@ package com.smartcal.services;
 import java.util.List;
 
 import com.smartcal.models.Event;
-import com.smartcal.models.User;
 
 public interface EventsService {
 
 	public Event getById(int eventId);
 	
-	public void attend(User u, Event evt);
+	public void attend(int userId, int evtId);
 	
-	public void cancel(User u, Event evt);
+	public void cancel(int userId, int evtId);
 
-	public List<Event> getPastEvents(User usr);
+	public List<Event> getPastEvents(int usrId);
 	
-	public List<Event> getIncomingEvents(User usr);
+	public List<Event> getIncomingEvents(int usrId);
+	
+	public List<Event> getEvents();
 	
 }
