@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.smartcal.models.User;
 import com.smartcal.utils.RepositoryUtils;
+import com.smartcal.utils.SQLQueries;
 
+@Repository
 public class FriendsRepositoryJdbcImpl implements FriendsRepository {
 
 	@Autowired
@@ -19,40 +22,29 @@ public class FriendsRepositoryJdbcImpl implements FriendsRepository {
 
 	@Override
 	public List<User> getFriendsFor(int usr) {
-		String sql = "select u.*"
-				+ "from smartcaldb.friend as f, smartcaldb.users as u"
-				+ "where f.user1 = ? and f.user2 = u.userid";
-		
-		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql,usr));
+		return RepositoryUtils.generateUserResultList(jdbcTemplate
+				.queryForList(SQLQueries.SQL_GET_FRIENDS_FOR_USER, usr));
 	}
 
 	@Override
 	public List<User> getFriendsWithSimilarityAbove(int usrId,
 			double minSimilarity) {
-		
-		String sql = "select u.*"
-				+ "from smartcaldb.friend as f, smartcaldb.users as u"
-				+ "where f.user1 = ? and f.similarity > ? and f.user2 = u.userid";
-		
-		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql,usrId,minSimilarity));
+		return RepositoryUtils.generateUserResultList(jdbcTemplate
+				.queryForList(SQLQueries.SQL_GET_FRIENDS_WITH_SIMILARITY,
+						usrId, minSimilarity));
 	}
 
 	@Override
 	public List<User> getFriendsAttending(int usr, int evt) {
-		String sql = "select u.*"
-		+ "from smartcaldb.events as e, smartcaldb.attending as a,"
-		+ " smartcaldb.friend as f, smartcaldb.users as u"
-		+ "where e.eventid = ? and f.user1 = ? and a.uid = f.user2 and a.eid = ? and a.uid = u.userid";
-		
-		return RepositoryUtils.generateUserResultList(jdbcTemplate.queryForList(sql,
-				evt, usr, evt));
+		return RepositoryUtils.generateUserResultList(jdbcTemplate
+				.queryForList(SQLQueries.SQL_GET_FRIENDS_ATTENDING, evt, usr,
+						evt));
 	}
-	
+
 	@Override
 	public void createFriendship(int usr1, int usr2, double similarity) {
-		String sql = "insert into smartcaldb.friend (user1, user2, similarity) values (?,?,?);";
-		jdbcTemplate.update(sql, usr1, usr2, similarity);
+		jdbcTemplate.update(SQLQueries.SQL_CREATE_FRIENDSHIP, usr1, usr2, similarity);
 		return;
 	}
-	
+
 }
