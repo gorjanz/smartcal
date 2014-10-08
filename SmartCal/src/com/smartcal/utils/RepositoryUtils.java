@@ -22,7 +22,7 @@ public class RepositoryUtils {
 			usr.setName((String) row.get(User.COLUMN_NAME));
 			usr.setEmail((String) row.get(User.COLUMN_EMAIL));
 			usr.setPassword((String) row.get(User.COLUMN_PASSWORD));
-			String[] date = ((String) row.get(User.COLUMN_SIGNUPDATE))
+			String[] date = ((Date) row.get(User.COLUMN_SIGNUPDATE)).toString()
 					.split("-");
 			int year = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
@@ -46,14 +46,14 @@ public class RepositoryUtils {
 			evt.setDescription((String) row.get(Event.COLUMN_DESCRIPTION));
 			evt.setUrl((String) row.get(Event.COLUMN_URL));
 
-			String[] startdate = ((String) row.get(Event.COLUMN_STARTIME))
+			String[] startdate = ((Date) row.get(Event.COLUMN_STARTIME)).toString()
 					.split("-");
 			int year = Integer.parseInt(startdate[0]);
 			int month = Integer.parseInt(startdate[1]);
 			int day = Integer.parseInt(startdate[2]);
 			evt.setStartTime(new Date(year, month, day));
 
-			String[] enddate = ((String) row.get(Event.COLUMN_ENDTIME))
+			String[] enddate = ((Date) row.get(Event.COLUMN_ENDTIME)).toString()
 					.split("-");
 			year = Integer.parseInt(enddate[0]);
 			month = Integer.parseInt(enddate[1]);
