@@ -20,11 +20,6 @@ public class UsersController {
 	@Autowired
 	private UsersService usersService;
 
-	public UsersController(UsersService usersService) {
-		super();
-		this.usersService = usersService;
-	}
-
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody List<User> getUsers() {

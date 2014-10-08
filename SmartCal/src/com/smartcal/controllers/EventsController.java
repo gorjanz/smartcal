@@ -20,11 +20,6 @@ public class EventsController {
 	@Autowired
 	private EventsService eventsService;
 
-	public EventsController(EventsService eventsService) {
-		super();
-		this.eventsService = eventsService;
-	}
-
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody List<Event> getEvents() {
