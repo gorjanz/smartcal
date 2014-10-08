@@ -12,7 +12,9 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<mvc:annotation-driven/>
-    <context:component-scan base-package="com.smarcal.controllers"/>
+    <context:component-scan base-package="com.smartcal.controllers"/>
 
+    <mvc:default-servlet-handler/>
+    
     <!-- ... -->
 </beans>
