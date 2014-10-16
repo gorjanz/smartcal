@@ -18,6 +18,7 @@ public class EventMapper implements RowMapper<Event> {
 		evt.setUrl(resSet.getString(Event.COLUMN_URL));
 		evt.setStartTime(resSet.getDate(Event.COLUMN_STARTIME));
 		evt.setStartTime(resSet.getDate(Event.COLUMN_ENDTIME));
+		evt.setCategory(resSet.getString(Event.COLUMN_CATEGORY));
 		return evt;
 	}
 	
