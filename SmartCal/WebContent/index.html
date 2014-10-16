@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo">
+<head>
+<meta charset="UTF-8">
+<title>SmartCal</title>
+
+<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+<script src='lib/jquery.min.js'></script>
+<script src='lib/moment.min.js'></script>
+<script src='fullcalendar/fullcalendar.js'></script>
+
+<script type="text/javascript" src="js/libraries/jquery.once.js"></script>
+
+<!--   include AngularJS and Angular UI -->
+<script type="text/javascript" src="js/libraries/angular.js"></script>
+<script type="text/javascript"
+	src="js/libraries/ui-bootstrap-tpls-0.11.2.min.js"></script>
+
+<!--   include twitter Bootstrap -->
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css">
+
+<!--   include my javascript files -->
+<script type="text/javascript" src="js/my/logic.js"></script>
+<script type="text/javascript" src="js/my/factories.js"></script>
+<script type="text/javascript" src="js/my/services.js"></script>
+
+<!--   apply my stylesheets -->
+<link rel="stylesheet" type="text/css" href="css/mystyles.css">
+
+</head>
+
+<body class="centered">
+
+	<div ng-controller="TabsController">
+		<tabset justified="true">
+		<tab heading="{{tab1.title}}">
+		<div class="well well-sm tab-content">
+			<div id='calendar' class='fullcal'></div>
+		</div>
+		</tab> 
+		<tab heading="{{tab2.title}}">
+		<div class="well well-sm tab-content">
+			<div class="datePickerDiv">
+				<div class="calendar">
+					<datepicker ng-model="dt" min-date="minDate" show-weeks="true"
+						starting-day="1"></datepicker>
+				</div>
+				<pre>Selected date is: <em>{{dt | date:'fullDate' }}</em>
+				</pre>
+			</div>
+			<div class="eventsListingDiv">
+				<table class="table table-hover table-bordered table-condensed ">
+					<tr>
+						<th>Event title</th>
+						<th>Event url</th>
+					</tr>
+					<tr ng-repeat="event in events"
+						ng-class="{ active: $index == state.selected }"
+						ng-click="state.selected = $index">
+						<td>{{event.title}}</td>
+						<td class="eventsTable">{{event.url}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</tab>
+		<tab heading="{{tab3.title}}">
+		<div class="well well-sm tab-content">
+				<div>
+					<div class="prefferencesLeftMainDiv">
+						<div class="changeSettingsSelection">
+							<span><h3>Change username</h3></span>
+								Old username:
+								<input type="text" class="form-control" placeholder="oldUsername">
+								New username:
+								<input type="text" class="form-control" placeholder="newUsername">
+						</div>
+						<div class="changeSettingsSelection">
+							<span><h3>Change password</h3></span>
+								Old password:
+								<input type="text" class="form-control" placeholder="oldPassword">
+								New password:
+								<input type="text" class="form-control" placeholder="newPassword">
+						</div>
+						<div class="changeSettingsSelection">
+							<span><h3>Change email</h3></span>
+								Old Email:
+								<input type="text" class="form-control" placeholder="oldEmail">
+								New Email:
+								<input type="text" class="form-control" placeholder="newEmail">
+						</div>
+					</div>
+					<div class="prefferencesRightMainDiv">
+					<div class="prefferencesControlsHolder">
+						<button type="button" class="btn btn-sm btn-danger controlButton" ng-click="submitPrefferences()">Save</button>
+						<button type="button" class="btn btn-sm btn-success controlButton" ng-click="resetPrefferences()">Reset</button>
+					</div>
+					<div class="categoryChooser">
+						<span>Choose how many events about Sport, 
+						Outdoor living, Health and Holidays,
+						would you like to see? </span>
+						<div class="btn-group dropDownButtonPadding" dropdown>
+							<button type="button" class="btn btn-danger">Choose #</button>
+							<button type="button" class="btn btn-danger dropdown-toggle">
+								<span class="caret"></span> <span class="sr-only">Split
+									button!</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="categoryChooser">
+						<span>How about Nightlife, Gallery openings,
+						Fundraisers, Concerts, Film showing events? </span>
+						<div class="btn-group dropDownButtonPadding" dropdown>
+							<button type="button" class="btn btn-danger">Choose #</button>
+							<button type="button" class="btn btn-danger dropdown-toggle">
+								<span class="caret"></span> <span class="sr-only">Split
+									button!</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+							</ul>
+						</div>
+
+					</div>
+					<div class="categoryChooser">
+						<span>What about Networking, Conferrences, 
+						or other events about science and education?</span>
+						<div class="btn-group dropDownButtonPadding" dropdown>
+							<button type="button" class="btn btn-danger">Choose #</button>
+							<button type="button" class="btn btn-danger dropdown-toggle">
+								<span class="caret"></span> <span class="sr-only">Split
+									button!</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="choice in items"><a href>{{choice}}</a></li>
+							</ul>
+						</div>
+					</div>
+					</div>
+				</div>
+		</div>
+		</tab>
+		<tab heading="{{tab4.title}}">
+		<div class="well well-sm tab-content">
+			<div class="friendsListingDiv">
+					<accordion close-others="oneAtATime">
+    					<accordion-group ng-repeat="friend in friends">
+      						<accordion-heading>
+            					{{friend.name}}
+            					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        					</accordion-heading>
+      					<div ng-repeat="event in friend.events">{{event.description}}</div>
+<!-- 							<div> -->
+<!-- 								{{friend.userName}}<br> -->
+<!-- 								{{friend.email}}<br> -->
+<!-- 								{{friend.signUpDate}}<br> -->
+<!-- 							</div> -->
+    					</accordion-group>
+  					</accordion>
+			</div>
+		</div>
+		</tab>
+		</tabset>
+	</div>
+
+</body>
+</html>

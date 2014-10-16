@@ -1,0 +1,105 @@
+ /* center the content, give size of the page 
+ 	applied to the body
+ */
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  margin-top: 50px;
+  background-color: #eee;
+  width: 900px;
+}
+
+ /* fixing bootstrap elements broken with angular-ui */
+.nav, .pagination, .carousel, .panel-title a { 
+	cursor: pointer;
+}
+
+/* set the size of the tab and its content */
+.tab-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  height: 900px;
+}
+
+/****************** TAB 1 *******************/
+
+/****************** TAB 2 *******************/
+/* apply styles to the date-picker calendar and the div that contains it*/
+.calendar {
+  display:inline-block;
+  min-height:290px;
+  margin-left: 75px;
+}
+
+.fullcal {
+	margin-top: 20px;
+}
+
+.datePickerDiv {
+	width: 432px;
+	float: left;
+	border-right: 1px solid orange;
+}
+
+.eventsListingDiv {
+	width: 400px;
+	float: right;
+}
+
+/****************** TAB 3 *******************/
+.prefferencesLeftMainDiv{
+	width: 400px;
+	float: left;
+}
+
+.prefferencesRightMainDiv{
+	border-left: 1px solid orange;
+	width: 450px;
+	float: right;
+}
+
+.categoryChooser {
+	width: 250px;
+	float: left;
+	height: 150px;
+	padding: 15px;
+}
+
+.changeSettingsSelection{
+	height: 150px;
+	width: 430px;
+	float: right;
+	padding-left: 55px;
+}
+
+.dropDownButtonPadding {
+	height: 50px;
+	width: 250;
+	padding: 10px;
+}
+
+.prefferencesControlsHolder {
+	width: 100px;
+	float: right;
+	height: 100px;
+	padding: 15px;
+}
+
+.controlButton {
+	margin: 5px;
+	width: 60px;
+}
+
+/****************** TAB 4 *******************/
+.friendsListingDiv {
+	width: 400px;
+	margin: 0px auto;
+	height: 600px;
+	padding: 10px;
+}
+
+.panel-body {
+	background-color: orange;
+}
