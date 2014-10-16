@@ -15,11 +15,13 @@ public class Event {
 	public static final String COLUMN_URL = "url";
 	public static final String COLUMN_STARTIME = "starttime";
 	public static final String COLUMN_ENDTIME = "endtime";
+	public static final String COLUMN_CATEGORY = "category";
 	
 	private int eventId;
 	private String title;
 	private String description;
 	private String url;
+	private String category;
 	private Date startTime;
 	private Date endTime;
 
@@ -54,6 +56,14 @@ public class Event {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public Date getStartTime() {
 		return startTime;
@@ -87,8 +97,10 @@ public class Event {
 		sb.append("Event ID: " + this.eventId + "\n");
 		sb.append("Title: " + this.title + "\n");
 		sb.append("Description: " + this.description + "\n");
+		sb.append("Category: " + this.category + "\n");
 		sb.append("Starting at: " + this.startTime.toString() + "\n");
 		sb.append("Ending at: " + this.endTime.toString() + "\n");
+		sb.append("URL: " + this.url + "\n");
 		return sb.toString();
 	}
 
