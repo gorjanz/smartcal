@@ -20,14 +20,10 @@ public class RepositoryUtils {
 			usr.setUserId(Integer.parseInt(String.valueOf(row
 					.get(User.COLUMN_USERID))));
 			usr.setName((String) row.get(User.COLUMN_NAME));
+			usr.setUserName((String)row.get(User.COLUMN_USERNAME));
 			usr.setEmail((String) row.get(User.COLUMN_EMAIL));
 			usr.setPassword((String) row.get(User.COLUMN_PASSWORD));
-			String[] date = ((Date) row.get(User.COLUMN_SIGNUPDATE)).toString()
-					.split("-");
-			int year = Integer.parseInt(date[0]);
-			int month = Integer.parseInt(date[1]);
-			int day = Integer.parseInt(date[2]);
-			usr.setSignUpDate(new Date(year, month, day));
+			usr.setSignUpDate((Date) row.get(User.COLUMN_SIGNUPDATE));
 			users.add(usr);
 		}
 		return users;
@@ -45,21 +41,10 @@ public class RepositoryUtils {
 			evt.setTitle((String) row.get(Event.COLUMN_TITLE));
 			evt.setDescription((String) row.get(Event.COLUMN_DESCRIPTION));
 			evt.setUrl((String) row.get(Event.COLUMN_URL));
-
-			String[] startdate = ((Date) row.get(Event.COLUMN_STARTIME)).toString()
-					.split("-");
-			int year = Integer.parseInt(startdate[0]);
-			int month = Integer.parseInt(startdate[1]);
-			int day = Integer.parseInt(startdate[2]);
-			evt.setStartTime(new Date(year, month, day));
-
-			String[] enddate = ((Date) row.get(Event.COLUMN_ENDTIME)).toString()
-					.split("-");
-			year = Integer.parseInt(enddate[0]);
-			month = Integer.parseInt(enddate[1]);
-			day = Integer.parseInt(enddate[2]);
-			evt.setEndTime(new Date(year, month, day));
-
+			evt.setCategory((String) row.get(Event.COLUMN_CATEGORY));
+			evt.setStartTime((Date) row.get(Event.COLUMN_STARTIME));
+			evt.setEndTime((Date) row.get(Event.COLUMN_ENDTIME));
+			
 			events.add(evt);
 		}
 		return events;
