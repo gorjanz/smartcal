@@ -25,7 +25,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public void addEvent(Event evt) {
-		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		jdbcTemplate.update(SQLQueries.SQL_ADD_EVENT, evt.getTitle(),
 				evt.getDescription(), evt.getUrl(),
 				formatter.format(evt.getStartTime()),
@@ -35,7 +35,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public void updateEvent(int id, Event evt) {
-		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		jdbcTemplate.update(SQLQueries.SQL_UPDATE_EVENT, evt.getTitle(),
 				evt.getDescription(), evt.getUrl(),
 				formatter.format(evt.getStartTime()),
@@ -77,7 +77,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public List<Event> getPastEvents(int usrId) {
-		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		return RepositoryUtils
 				.generateEventResultList(jdbcTemplate.queryForList(
@@ -87,7 +87,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public List<Event> getIncomingEvents(int usrId) {
-		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		return RepositoryUtils
 				.generateEventResultList(jdbcTemplate.queryForList(
@@ -97,7 +97,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public List<Event> getByDate(Date date) {
-		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		return RepositoryUtils.generateEventResultList(jdbcTemplate
 				.queryForList(SQLQueries.SQL_GET_EVENTS_BY_DATE,
