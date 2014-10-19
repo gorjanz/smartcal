@@ -8,7 +8,7 @@ $(document).ready(function() {
 		// put your options and callbacks here
 
 		events : mainCalendarEvents,
-		
+	    		
 		fixedWeekCount: true,
 		firstDay: 1,
 		
@@ -17,6 +17,63 @@ $(document).ready(function() {
 		    center: 'month,agendaWeek,agendaDay',
 		    right:  'today prev,next'
 		},
+
+		// callback function executed each time a day is clicked in the calendar
+//		dayClick: function(date, jsEvent, view) {
+//
+//	        alert('Clicked on: ' + date.format());
+//
+//	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//
+//	        alert('Current view: ' + view.name);
+//
+//	        // change the day's background color just for fun
+//	        $(this).css('background-color', 'red');
+//
+//	    },
+	    
+		eventRender: function (event, element) {
+            element.attr('href', 'javascript:void(0);');
+            element.click(function() {
+                //set the modal values and open
+                $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
+                $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
+                $('#modalTitle').html(event.title);
+                $('#modalBody').html(event.description);
+                $('#eventUrl').attr('href',event.url);
+                $('#fullCalModal').modal();
+            });
+        },
+		
+	    select: function(start, end, allDay) {
+	        var title = prompt('Event Title:');
+	        console.log("prompt called");
+	        if (title) {
+	            calendar.fullCalendar('renderEvent',
+	                {
+	                    title: title,
+	                    start: start,
+	                    end: end,
+	                    allDay: allDay
+	                },
+	                true // make the event "stick"
+	            );
+	            /**
+	             * ajax call to store event in DB
+	             */
+//	            jQuery.post(
+//	                "event/new" // your url
+//	                , { // re-use event's data
+//	                    title: title,
+//	                    start: start,
+//	                    end: end,
+//	                    allDay: allDay
+//	                }
+//	            );
+	        }
+	        calendar.fullCalendar('unselect');
+	    },
+
 		
 		dayRender : function(date, cell) {
 			
@@ -30,11 +87,6 @@ $(document).ready(function() {
 				cell.css("background-color", "#FF8330");
 			}
 			
-		},
-
-		// callback function executed each time a day is clicked in the calendar
-		dayClick : function(date) {
-			alert(data + "a day has been clicked!" + date.format('YYYY MM DD'));
 		}
 
 	});
@@ -42,7 +94,7 @@ $(document).ready(function() {
 })
 
 // angular main module declaration and initialization
-var mymodule = angular.module('ui.bootstrap.demo', ['ui.bootstrap', 'factories', 'services']);
+var mymodule = angular.module('smartcal', ['ui.bootstrap', 'factories', 'services']);
 mymodule.run(function (EventsData, $log, $timeout){
 	$timeout(function(){
 		EventsData.init();
@@ -52,25 +104,19 @@ mymodule.run(function (EventsData, $log, $timeout){
 });
 
 // angular controller for the tabs component
-mymodule.controller('TabsController', function($scope, $log, EventsData, $timeout, $http) {
+mymodule.controller('TabsController', function($scope, $log, EventsData, $timeout, $http, load) {
   
 	//global data variables
 	$scope.friends = [];
 	$scope.events = [];
 	
 	// set tabs titles
-	$scope.tab1 = {
-		title : "My Schedule"
-	};
-	$scope.tab2 = {
-		title : "Up-Coming Events"
-	};
-	$scope.tab3 = {
-		title : "My Prefferences"
-	};
-	$scope.tab4 = {
-		title : "Friend activity"
-	};	
+	$scope.tabs = [
+	               { title : "My Schedule" },
+	               { title : "Up-Coming Events" },
+	               { title : "My Prefferences" },
+	               { title : "Friend activity"
+	}]	
 
 //***************************** tab1 settings ********************************
 	
@@ -78,26 +124,32 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 	
 	$scope.events = [];
 	
-	$http.get('/smartcal/events').success(function(data, status, headers, config) {
-		$scope.events = data; 
+	load.makeCall('/smartcal/events').then(function(data) {
+		$scope.events = data;
 		$log.info($scope.events);
 		var events = [];
-		for(e in $scope.events){
+		for(var i = 0; i<$scope.events.length; i++){
+			$log.info($scope.events[i].startTime);
 			var event = {
-				title: e.title,
-				start: e.startTime,
-				end: e.endTime,
-				url: e.url
+				id : $scope.events[i].eventId,
+				title: $scope.events[i].title,
+				start: (2*60*60*1000) + $scope.events[i].startTime, //+2hours cause of default locale
+				end: (2*60*60*1000) + $scope.events[i].endTime,
+				url: $scope.events[i].url
 			}
+			$log.info(event);
 			events.push(event);
 		}
 		$log.info(events);
 		mainCalendarEvents = events;
-		$('#calendar').fullCalendar( 'rerenderEvents' );
-    }).error(function(data, status) {
-        $log.info('The error data is: ' + data);
-    });
-  
+		$('#calendar').fullCalendar( 'removeEvents', events );
+		$('#calendar').fullCalendar( 'addEventSource', events );
+		$('#calendar').fullCalendar('rerenderEvents');
+	}, function(data){
+		$log.info('The error data is: ' + data);
+	});
+	
+	
 	
 //***************************** tab2 settings ********************************
 	
@@ -163,22 +215,31 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 	$scope.oneAtATime = true;
 
 	$scope.friends = [];
+	$scope.friendEvents = [];
+	var addFriendEvents = function(data){
+		$scope.friendEvents.push(data);
+	}
 	
-	$http.get('/smartcal/users/1/friends').success(function(data, status, headers, config) {
+	load.makeCall('/smartcal/users/1/friends').then(function(data) {
 		$scope.friends = data; 
+		$log.info("fetched friends");
 		$log.info($scope.friends);
-//		for (var int = 0; int < $scope.friends.length; int++) {
-//			$http.get("/smartcal/users/"+ $scope.friends[int].userId +"/past").success(function(data, status, headers, config) {
-//				$log.info($scope.friends[int].userId);
-//				$scope.friends[int].userId.events = [];
-//				$scope.friends[int].userId.events = data;
-//				$log.info($scope.friends[int].userId.events);
-//			}).error(function(data, status) {
-//		        $log.info('The error data is: ' + data);
-//		    });
-//		}
-    }).error(function(data, status) {
-        $log.info('The error data is: ' + data);
-    });
+		for (var int = 0; int < $scope.friends.length; int++) {
+			$scope.getEventsForFriend($scope.friends[int].userId);
+		}
+	}, function(data){
+		$log.info('The error data is: ' + data);
+	});
+	
+
+	$scope.getEventsForFriend = function(friendId){
+		load.makeCall("/smartcal/users/"+ friendId +"/past").then(function(data) {
+			$log.info(data);
+			addFriendEvents(data);
+		}, function(data) {
+			$log.info('The error data is: ' + data);
+		});
+		
+	}
 	
 });
