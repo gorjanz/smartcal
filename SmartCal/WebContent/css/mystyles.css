@@ -21,7 +21,7 @@
   margin-right: auto;
   width: 900px;
   height: 750px;
-  background-color: #DDDDEB;
+  background-color: #7676A4;
 }
 
 /****************** TAB 1 *******************/
@@ -105,6 +105,11 @@
 	background-color: orange;
 }
 
-.modal-goToEventPage-Button {
+.modal-Button {
+	background-color: #DDDDEB;
+	color: black;
+}
+
+.modal-content {
 	background-color: orange;
 }

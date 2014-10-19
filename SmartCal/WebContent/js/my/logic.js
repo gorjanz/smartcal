@@ -1,9 +1,42 @@
 // setup global variables used for communication between angular fetched data and calendar data
 var mainCalendarEvents = [];
 
+var newEventStartTime = null;
+var newEventEndTime = null;
+var newEventCategory = null;
+
 //jQuery calendar code
 $(document).ready(function() {
 
+	$('#newEventCategory li').on('click', function(){
+		newEventCategory = $(this).text();
+		console.log(newEventCategory);
+		
+		$('#newEventCategory').text(newEventCategory);
+		
+	});
+	
+	$('#addNewEventConfirmationButton').on('click', function(){
+		var newEvent = {
+				title: $('#newEventTitle').val(),
+				description : $('#newEventDescription').val(),
+				url: $('#newEventUrl').val(),
+				start: newEventStartTime,
+				startTime: newEventStartTime,
+				end: newEventEndTime,
+				endTime: newEventEndTime,
+				category: newEventCategory
+		}
+		
+		alert("new event: " + newEvent.start + " : " + newEvent.end);
+		console.log("new event: " + newEvent);
+		
+		$('#calendar').fullCalendar('renderEvent', newEvent , true);
+		$('#calendar').fullCalendar('unselect');
+		
+		$('#addNewEventModal').modal('hide');
+	});
+		
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
 
@@ -12,27 +45,24 @@ $(document).ready(function() {
 		fixedWeekCount: true,
 		firstDay: 1,
 		
+	//	allDaySlot: false,
+		allDayDefault: false,
+		
 		header : {
 			left:   'title',
 		    center: 'month,agendaWeek,agendaDay',
 		    right:  'today prev,next'
 		},
+		
+		selectable: true,
 
 		// callback function executed each time a day is clicked in the calendar
 //		dayClick: function(date, jsEvent, view) {
-//
-//	        alert('Clicked on: ' + date.format());
-//
-//	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-//
-//	        alert('Current view: ' + view.name);
-//
-//	        // change the day's background color just for fun
-//	        $(this).css('background-color', 'red');
-//
-//	    },
-	    
+//		
+//		},
+	      	    
 		eventRender: function (event, element) {
+			
             element.attr('href', 'javascript:void(0);');
             element.click(function() {
                 //set the modal values and open
@@ -46,18 +76,16 @@ $(document).ready(function() {
         },
 		
 	    select: function(start, end, allDay) {
-	        var title = prompt('Event Title:');
-	        console.log("prompt called");
-	        if (title) {
-	            calendar.fullCalendar('renderEvent',
-	                {
-	                    title: title,
-	                    start: start,
-	                    end: end,
-	                    allDay: allDay
-	                },
-	                true // make the event "stick"
-	            );
+
+	    	newEventStartTime = start;
+	    	newEventEndTime = end;
+	    	
+	    	console.log("start: " + newEventStartTime.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+	    	console.log("end: " + newEventEndTime.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+	    	
+	    	$('#addNewEventModal').modal();
+	    	
+
 	            /**
 	             * ajax call to store event in DB
 	             */
@@ -70,8 +98,7 @@ $(document).ready(function() {
 //	                    allDay: allDay
 //	                }
 //	            );
-	        }
-	        calendar.fullCalendar('unselect');
+	    	$('#calendar').fullCalendar('unselect');
 	    },
 
 		
@@ -135,8 +162,19 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 				title: $scope.events[i].title,
 				start: (2*60*60*1000) + $scope.events[i].startTime, //+2hours cause of default locale
 				end: (2*60*60*1000) + $scope.events[i].endTime,
-				url: $scope.events[i].url
+				url: $scope.events[i].url,
+				category: $scope.events[i].category,
+				color: '#00FF00' // defaults to "sports" category - green color
 			}
+			// set event color to red if it is an event from the "nightlife" category
+			if(event.category == 'nightlife'){
+				event.color = '#FF0000';
+			}
+			// set event color to blue if it is an event from the "education" category
+			if(event.category == 'education'){
+				event.color = '#0000FF';
+			}
+
 			$log.info(event);
 			events.push(event);
 		}

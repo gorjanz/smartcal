@@ -175,13 +175,51 @@
             <div id="modalBody" class="modal-body">
             	<h4 id="modalTitle" class="modal-title"></h4>
                 Start: <span id="startTime"></span><br>
-    			End: <span id="endTime"></span><br><br>
+                <span role="presentation" class="divider"></span>
+                End: <span id="endTime"></span><br><br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary modal-goToEventPage-Button">
+                <button class="btn btn-primary modal-Button">
                 	<a id="eventUrl" target="_blank">Event Page</a>
                 </button>
+            </div>
+        </div>
+    </div>
+	</div>
+	
+	<div id="addNewEventModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            	<span><h3>Add new Event</h3></span>
+            </div>
+            <div id="modalBody" class="modal-body">
+				<h4>Please enter a title for the event</h4>
+				<input type="text" class="form-control" placeholder="newEventTitle" id="newEventTitle">
+				<h4>Please enter a short description for the event</h4>
+				<input type="text" class="form-control" placeholder="newEventDescription" id="newEventDescription">
+				<h4>Please enter the an URL for the event (if any):</h4>
+				<input type="text" class="form-control" placeholder="newEventUrl" id="newEventUrl">
+				<h4>Please choose the appropriate category for this event:</h4>
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="newEventCategory" data-toggle="dropdown">
+				    	Choose Category
+					<span class="caret"></span>
+				  	</button>
+				  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="newEventCategory">
+				 		<li role="presentation"><a role="menuitem" tabindex="1" href="#">Sports</a></li>
+				    	<li role="presentation"><a role="menuitem" tabindex="2" href="#">Nightlife</a></li>
+				    	<li role="presentation"><a role="menuitem" tabindex="3" href="#">Education</a></li>
+				  	</ul>
+				</div>
+				
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary modal-Button" id="addNewEventConfirmationButton">Add Event</button>
             </div>
         </div>
     </div>
