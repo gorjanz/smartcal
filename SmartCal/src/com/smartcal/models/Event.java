@@ -1,6 +1,6 @@
 package com.smartcal.models;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 
@@ -22,8 +22,8 @@ public class Event {
 	private String description;
 	private String url;
 	private String category;
-	private Date startTime;
-	private Date endTime;
+	private Timestamp startTime;
+	private Timestamp endTime;
 
 	public int getEventId() {
 		return eventId;
@@ -65,19 +65,19 @@ public class Event {
 		this.category = category;
 	}
 
-	public Date getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
 

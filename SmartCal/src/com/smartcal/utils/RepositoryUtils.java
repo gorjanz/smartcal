@@ -1,6 +1,7 @@
 package com.smartcal.utils;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +43,8 @@ public class RepositoryUtils {
 			evt.setDescription((String) row.get(Event.COLUMN_DESCRIPTION));
 			evt.setUrl((String) row.get(Event.COLUMN_URL));
 			evt.setCategory((String) row.get(Event.COLUMN_CATEGORY));
-			evt.setStartTime((Date) row.get(Event.COLUMN_STARTIME));
-			evt.setEndTime((Date) row.get(Event.COLUMN_ENDTIME));
+			evt.setStartTime((Timestamp) row.get(Event.COLUMN_STARTIME));
+			evt.setEndTime((Timestamp) row.get(Event.COLUMN_ENDTIME));
 			
 			events.add(evt);
 		}

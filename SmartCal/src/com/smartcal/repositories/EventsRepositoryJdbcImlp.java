@@ -25,7 +25,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public void addEvent(Event evt) {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
 		jdbcTemplate.update(SQLQueries.SQL_ADD_EVENT, evt.getTitle(),
 				evt.getDescription(), evt.getUrl(),
 				formatter.format(evt.getStartTime()),
@@ -35,7 +35,7 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public void updateEvent(int id, Event evt) {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
 		jdbcTemplate.update(SQLQueries.SQL_UPDATE_EVENT, evt.getTitle(),
 				evt.getDescription(), evt.getUrl(),
 				formatter.format(evt.getStartTime()),
@@ -77,31 +77,25 @@ public class EventsRepositoryJdbcImlp implements EventsRepository {
 
 	@Override
 	public List<Event> getPastEvents(int usrId) {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
 		return RepositoryUtils
 				.generateEventResultList(jdbcTemplate.queryForList(
 						SQLQueries.SQL_GET_PAST_EVENTS_FOR_USER, usrId,
-						formatter.format(new Date(System.currentTimeMillis()))));
+						new java.sql.Timestamp(new Date(System.currentTimeMillis()).getTime())));
 	}
 
 	@Override
 	public List<Event> getIncomingEvents(int usrId) {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
 		return RepositoryUtils
 				.generateEventResultList(jdbcTemplate.queryForList(
 						SQLQueries.SQL_GET_UPCOMING_EVENTS_FOR_USER, usrId,
-						formatter.format(new Date(System.currentTimeMillis()))));
+						new java.sql.Timestamp(new Date(System.currentTimeMillis()).getTime())));
 	}
 
 	@Override
 	public List<Event> getByDate(Date date) {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
 		return RepositoryUtils.generateEventResultList(jdbcTemplate
 				.queryForList(SQLQueries.SQL_GET_EVENTS_BY_DATE,
-						formatter.format(date)));
+						new java.sql.Timestamp(date.getTime())));
 	}
 
 }
