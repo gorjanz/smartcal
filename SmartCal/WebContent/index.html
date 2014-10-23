@@ -155,7 +155,7 @@
             					{{friend.name}}
             					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         					</accordion-heading>
-      					<div ng-repeat="event in friendEvents[$index]">{{event.description}}</div>
+      					<div ng-repeat="event in friendEvents[$index].events">{{event.description}}</div>
     					</accordion-group>
   					</accordion>
 			</div>

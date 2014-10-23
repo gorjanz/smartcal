@@ -256,6 +256,20 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 	$scope.friendEvents = [];
 	var addFriendEvents = function(data){
 		$scope.friendEvents.push(data);
+		$scope.friends.sort(function(friend1,friend2){
+			if(friend1.userId < friend2.userId)
+				return -1;
+			if(friend1.userId < friend2.userId)
+				return 1;
+			return 0;
+		});
+		$scope.friendEvents.sort(function(events1,events2){
+			if(events1.friendId < events2.friendId)
+				return -1;
+			if(events1.friendId < events2.friendId)
+				return 1;
+			return 0;
+		});
 	}
 	
 	load.makeCall('/smartcal/users/1/friends').then(function(data) {
@@ -273,7 +287,11 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 	$scope.getEventsForFriend = function(friendId){
 		load.makeCall("/smartcal/users/"+ friendId +"/past").then(function(data) {
 			$log.info(data);
-			addFriendEvents(data);
+			var eventWithFriendIdAttached = {
+					events: data,
+					id: friendId
+			};
+			addFriendEvents(eventWithFriendIdAttached);
 		}, function(data) {
 			$log.info('The error data is: ' + data);
 		});
