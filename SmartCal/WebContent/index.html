@@ -32,14 +32,16 @@
 
 </head>
 
-<body class="centered">
+<body>
 
-	<div ng-controller="TabsController">
+	<button type="button" class="btn btn-sm btn-danger logoutButton" ng-click="logout()">Logout</button>
+
+	<div ng-controller="TabsController" class="tabControl">
 		<tabset justified="true">
 		<tab heading="{{tabs[0].title}}">
-		<div class="well well-sm tab-content">
-			<div id='calendar' class='fullcal'></div>
-		</div>
+			<div class="well well-sm tab-content">
+				<div id='calendar' class='fullcal'></div>
+			</div>
 		</tab> 
 		<tab heading="{{tabs[1].title}}">
 		<div class="well well-sm tab-content">
@@ -48,21 +50,23 @@
 					<datepicker ng-model="dt" min-date="minDate" show-weeks="true"
 						starting-day="1"></datepicker>
 				</div>
-				<pre>Selected date is: <em>{{dt | date:'fullDate' }}</em>
-				</pre>
+				<pre>Upcoming events after <em>{{dt | date:'fullDate' }}</em> are:</pre>
 			</div>
 			<div class="eventsListingDiv">
-				<table class="table table-hover table-bordered table-condensed ">
+				<table class="table table-hover table-bordered table-condensed "
+					ng-repeat="event in events| showByDate:dt">
 					<tr>
-						<th>Event title</th>
-						<th>Event url</th>
-					</tr>
-					<tr ng-repeat="event in events"
-						ng-class="{ active: $index == state.selected }"
-						ng-click="state.selected = $index">
-						<td>{{event.title}}</td>
-						<td class="eventsTable">{{event.url}}</td>
-					</tr>
+						<td colspan="1">{{event.title}}</td>
+						<td colspan="2">{{event.description}}</td>
+						<td colspan="1" ng-class="event.category">{{event.category}}</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<a ng-href="{{event.url}}"><img src="images/event128px.png" class="eventImg"/></a>
+							</td>
+							<td colspan="1">Starts at: {{event.startTime | date:'medium'}}</td>
+							<td colspan="1">Ends at: {{event.endTime | date:'medium'}}</td>
+						</tr>
 				</table>
 			</div>
 		</div>
@@ -155,7 +159,20 @@
             					{{friend.name}}
             					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         					</accordion-heading>
-      					<div ng-repeat="event in friendEvents[$index].events">{{event.description}}</div>
+							<div ng-repeat="event in friendEvents[$index].events">
+								<table class="table table-hover table-bordered table-condensed">
+									<tr>
+										<td colspan="1">{{event.title}}</td>
+										<td colspan="2">{{event.description}}</td>
+										<td colspan="1" ng-class="event.category">{{event.category}}</td>
+									</tr>
+									<tr>
+										<td colspan="2"><a ng-href="{{event.url}}">Details</a></td>
+										<td colspan="1">Starts at: {{event.startTime | date:'medium'}}</td>
+										<td colspan="1">Ends at: {{event.endTime | date:'medium'}}</td>
+									</tr>
+								</table>
+      					</div>
     					</accordion-group>
   					</accordion>
 			</div>

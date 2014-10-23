@@ -1,11 +1,26 @@
  /* center the content, give size of the page 
  	applied to the body
  */
-.centered {
+.body {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #eee;
+  width: 900px;
+}
+
+.logoutButton {
+	position: fixed;
+	width: 60px;
+	top: 5px;
+	left: 1065px;
+	z-index: -1;
+}
+
+.tabControl {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 25px;
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: #eee;
   width: 900px;
 }
@@ -45,8 +60,18 @@
 }
 
 .eventsListingDiv {
+	background-color: #eee;
 	width: 400px;
 	float: right;
+}
+
+.eventImg {
+	position: absolute;
+	margin: auto 10px;
+	width: 16px;
+	max-width: 48px;
+	height: 16px;
+	max-height: 48px;
 }
 
 /****************** TAB 3 *******************/
@@ -95,14 +120,34 @@
 
 /****************** TAB 4 *******************/
 .friendsListingDiv {
-	width: 400px;
+	width: 600px;
 	margin: 0px auto;
 	height: 600px;
 	padding: 10px;
 }
 
+.nightlife {
+	background-color: #FF0000;
+}
+
+.education {
+	background-color: #0000FF;
+}
+
+.sports {
+	background-color: #00FF00;
+}
+
+.eventImg {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	float: left;
+}
+
+
 .panel-body {
-	background-color: orange;
+	background-color: #eee;
 }
 
 .modal-Button {

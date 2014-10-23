@@ -2,7 +2,7 @@
     <wb-module deploy-name="SmartCal">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="SmartCal"/>
         <property name="java-output-path" value="/SmartCal/build/classes"/>
+        <property name="context-root" value="smartcal"/>
     </wb-module>
 </project-modules>

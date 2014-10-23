@@ -130,6 +130,24 @@ mymodule.run(function (EventsData, $log, $timeout){
 	$log.info(EventsData.getEvents());
 });
 
+
+mymodule.filter('showByDate', function() {
+	  return function (events, selectedDate) {
+
+		    var filtered_list = [];
+
+		    var selectedTime = selectedDate.getTime();
+		    
+		    for (var i = 0; i < events.length; i++) {
+
+		      if (events[i].startTime >= selectedTime) {
+		        filtered_list.push(events[i]);
+		      }
+		    }
+		    return filtered_list;
+		  }
+		});
+
 // angular controller for the tabs component
 mymodule.controller('TabsController', function($scope, $log, EventsData, $timeout, $http, load) {
   
@@ -206,11 +224,8 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 		return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
 	};
 
-	$scope.toggleMin = function() {
-		$scope.minDate = $scope.minDate ? null : new Date();
-	};
+	$scope.minDate = new Date("2000-01-01");
 	
-	$scope.toggleMin();
 	$scope.open = function($event) {
 		$event.preventDefault();
 		$event.stopPropagation();
@@ -230,8 +245,8 @@ mymodule.controller('TabsController', function($scope, $log, EventsData, $timeou
 //***************************** tab3 settings ********************************
 	
 	// drop-down options
-  	$scope.items = [ 'One time per week', 'Two times per week',
-			'Three times per week' ];
+  	$scope.items = [ 'One per week', 'Two per week',
+			'Three per week' ];
 
 	$scope.status = {
 		isopen : false
