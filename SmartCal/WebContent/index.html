@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <title>SmartCal</title>
 
-<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-<script src='lib/jquery.min.js'></script>
-<script src='lib/moment.min.js'></script>
-<script src='fullcalendar/fullcalendar.js'></script>
-<link rel="stylesheet" type="text/css" href="css/mystyles.css">
+<link rel='stylesheet' href='resources/fullcalendar/fullcalendar.css' />
+<script src='resources/lib/jquery.min.js'></script>
+<script src='resources/lib/moment.min.js'></script>
+<script src='resources/fullcalendar/fullcalendar.js'></script>
+<link rel="stylesheet" type="text/css" href="resources/css/mystyles.css">
 
-<script type="text/javascript" src="js/libraries/jquery.once.js"></script>
+<script type="text/javascript" src="resources/js/libraries/jquery.once.js"></script>
 
 <!--   include AngularJS and Angular UI -->
-<script type="text/javascript" src="js/libraries/angular.js"></script>
+<script type="text/javascript" src="resources/js/libraries/angular.js"></script>
 <script type="text/javascript"
-	src="js/libraries/ui-bootstrap-tpls-0.11.2.min.js"></script>
+	src="resources/js/libraries/ui-bootstrap-tpls-0.11.2.min.js"></script>
 
 <!--   include twitter Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap.min.css">
+	href="resources/bootstrap/css/bootstrap.min.css">
 
 <!--   include my javascript files -->
-<script type="text/javascript" src="js/my/logic.js"></script>
-<script type="text/javascript" src="js/my/factories.js"></script>
-<script type="text/javascript" src="js/my/services.js"></script>
+<script type="text/javascript" src="resources/js/my/logic.js"></script>
+<script type="text/javascript" src="resources/js/my/factories.js"></script>
+<script type="text/javascript" src="resources/js/my/services.js"></script>
 
 <!--   apply my stylesheets -->
-<link rel="stylesheet" type="text/css" href="css/mystyles.css">
+<link rel="stylesheet" type="text/css" href="resources/css/mystyles.css">
 
 </head>
 
@@ -62,7 +62,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-							<a ng-href="{{event.url}}"><img src="images/event128px.png" class="eventImg"/></a>
+							<a ng-href="{{event.url}}"><img src="resources/images/event128px.png" class="eventImg"/></a>
 							</td>
 							<td colspan="1">Starts at: {{event.startTime | date:'medium'}}</td>
 							<td colspan="1">Ends at: {{event.endTime | date:'medium'}}</td>

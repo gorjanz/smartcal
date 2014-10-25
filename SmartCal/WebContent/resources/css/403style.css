@@ -1,0 +1,21 @@
+body {
+	background-color: rgb(44, 71, 98);
+}
+
+.content {
+	margin: auto;
+	width: 490px;
+	height: 490px;		
+}
+
+.imageDiv {
+	margin: auto;
+	width: 490px;
+	height: 490px;
+}
+
+.loginButton {
+	position:relative;
+	top: 20px;
+	margin: auto;
+}
