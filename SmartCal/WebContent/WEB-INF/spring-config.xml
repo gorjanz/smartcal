@@ -14,12 +14,10 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         http://www.springframework.org/schema/jee
         http://www.springframework.org/schema/jee/spring-jee.xsd">
-
-<!--     <import resource="classpath:WEB-INF/spring-security.xml" /> -->
     
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.smartcal.**" />
-
+	
 	<!-- setup database connectivity bean -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
@@ -49,7 +47,6 @@
 <!-- 			</list> -->
 <!-- 		</property> -->
 <!-- 	</bean> -->
-
 
 	<bean id="contentNegotiationManager"
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
