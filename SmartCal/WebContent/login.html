@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Spring Security Tutorial - Form</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Smartcal - Login</title>
+	<script type="text/javascript" src='resources/lib/jquery.min.js'></script>
+	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/loginStyle.css">
+
+
 </head>
 
 <body>
-	<form action="/smartcal/j_spring_security_check.action" method="POST">
-		<label for="username">User Name:</label>
-		<input id="username" name="j_username" type="text" />
-		<label for="password">Password:</label>
-		<input id="password" name="j_password" type="password" />
-		<input type="submit" value="Log In" />
-	</form>
+
+	<div class="content">
+		<div class="logoDiv">
+			<h1>Welcome to SmartCal</h1>
+			<img alt="smartcal-logo" src="resources/images/date.png" class="image"]>
+		</div>
+		<div class="loginDiv">
+			<form action="/smartcal/j_spring_security_check.action" method="POST">
+				<label for="username">User Name:</label>
+				<input id="username" name="j_username" type="text" class="form-control" />
+				<label for="password">Password:</label>
+				<input id="password" name="j_password" type="password" class="form-control" />
+				<div class="loginButtonHolder">
+					<input type="submit" class="btn btn-sm btn-danger loginButton" value="Log In" />
+				</div>
+			</form>
+		</div>	
+	</div>
 </body>
 </html>
