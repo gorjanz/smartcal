@@ -67,6 +67,14 @@
 							<td colspan="1">Starts at: {{event.startTime | date:'medium'}}</td>
 							<td colspan="1">Ends at: {{event.endTime | date:'medium'}}</td>
 						</tr>
+						<tr>
+						<td colspan="2">
+							<button type="button" class="btn btn-sm btn-success" ng-click="acceptEvent($index)">Accept</button>
+						</td>
+						<td colspan="2">
+							<button type="button" class="btn btn-sm btn-danger" ng-click="acceptEvent($index)">Dismiss</button>
+						</td>
+						</tr>
 				</table>
 			</div>
 		</div>
