@@ -103,5 +103,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/proxytoys-1.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/eventfulapi.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
